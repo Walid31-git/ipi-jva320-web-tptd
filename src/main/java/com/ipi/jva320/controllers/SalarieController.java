@@ -56,4 +56,12 @@ public class SalarieController {
         return "list";
     }
 
+// Méthode qui gère la modification d’un salarié puis redirige vers sa page de détails afin de constater les changements (les champs modifiés ne sont plus éditables mais affichés comme pris en compte)
+    @PostMapping("/salaries/{id}")
+    public String updateSalarie(@PathVariable(value = "id") Long id, final ModelMap model,
+                                SalarieAideADomicile updatedSalarie) throws EntityExistsException, SalarieException {
+        salarieAideADomicileService.updateSalarieAideADomicile(updatedSalarie);
+        model.put("salaries", salarieAideADomicileService.getSalaries());
+        return "redirect:/salaries/" + updatedSalarie.getId();
+    }
 }

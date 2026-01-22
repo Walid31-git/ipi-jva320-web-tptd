@@ -32,12 +32,13 @@
 
     <h2>Détail du salarié n° <span th:text="${id}">10</span></h2>
 
-    <form id="saveForm" th:action="|/salaries/aide/${id}|" method="post" class="row">
+    <!-- Ce formulaire envoie, via la méthode POST, les informations du salarié vers l’URL associée à son identifiant  -->
+    <form id="saveForm" th:action="@{/salaries/{id}(id=${salarie.id})}" method="post" class="row">
 
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="id">ID</label>
-                <input type="text" th:value="${id}" class="form-control" name="id" id="id" disabled="true">
+                <input type="text" th:value="${salarie.id}" class="form-control" name="id" id="id" disabled="true" >
 
                 <label class="form-control-label" for="nom">Nom</label>
                 <input type="text" th:value="${salarie.nom}" class="form-control" name="nom" id="nom">
@@ -54,7 +55,7 @@
             <div class="form-group">
                 <div>
                     <label class="form-control-label">joursTravaillesAnneeN</label>
-                    <input type="number" step="0.5" th:value="${salarie.joursTravaillesAnneeN}" class="form-control">
+                    <input type="number" step="0.5" th:value="${salarie.joursTravaillesAnneeN}" class="form-control" name="joursTravaillesAnneeN" id="joursTravaillesAnneeN">
                 </div>
 
                 <div>
@@ -68,8 +69,10 @@
             <div>
                 <label class="form-control-label" for="joursTravaillesAnneeNMoins1">joursTravaillesAnneeNMoins1</label>
                 <div class="input-group">
-                    <input type="number" step="0.5" th:value="${salarie.joursTravaillesAnneeNMoins1}" class="form-control" name="joursTravaillesAnneeNMoins1" id="joursTravaillesAnneeNMoins1">
-                    <div class="input-group-append"><span class="input-group-text">j</span></div>
+                    <input type="number" step="0.5" th:value="${salarie.congesPayesAcquisAnneeN}" class="form-control" name="congesPayesAcquisAnneeN" id="congesPayesAcquisAnneeN">
+                        <div class="input-group-append">
+                            <span class="input-group-text">j</span>
+                        </div>
                 </div>
             </div>
 
