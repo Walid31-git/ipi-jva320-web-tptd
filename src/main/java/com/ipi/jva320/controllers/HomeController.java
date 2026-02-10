@@ -37,6 +37,7 @@ public class HomeController {
     }
 
  */
+    /* // Commenté pour éviter le conflit avec SalarieController qui gère maintenant cette route
     @GetMapping("/salaries/{id}")
     public String getSalarieDetails(@PathVariable("id") Long id, ModelMap model) {
         SalarieAideADomicile salarieExistant = salarieAideADomicileService.getSalarie(id);
@@ -46,4 +47,5 @@ public class HomeController {
 
         return "detail_Salarie";
     }
+    */
 }
