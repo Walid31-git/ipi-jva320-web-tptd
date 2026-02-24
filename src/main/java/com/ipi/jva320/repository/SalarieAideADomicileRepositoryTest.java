@@ -20,7 +20,7 @@ class SalarieAideADomicileRepositoryTest {
     public void before() {
     	SalarieAideADomicileRepository.deleteAll();
     }
-    
+
     @Test
     void testFindByNom_shouldReturnSalarie() {
 
@@ -50,5 +50,28 @@ class SalarieAideADomicileRepositoryTest {
 
         // Vérification : ici je m’attends à ne rien trouver
         Assertions.assertNull(resultat);
+    }
+        @Test
+    public void testPartCongesPrisTotauxAnneeNMoins1() {
+        // GIVEN : création de deux salariés avec congés
+        SalarieAideADomicile salarie1 = new SalarieAideADomicile();
+        salarie1.setNom("Dupont");
+        salarie1.setCongesPayesPrisAnneeNMoins1(10.0);
+        salarie1.setCongesPayesAcquisAnneeNMoins1(20.0);
+
+        SalarieAideADomicile salarie2 = new SalarieAideADomicile();
+        salarie2.setNom("Durand");
+        salarie2.setCongesPayesPrisAnneeNMoins1(5.0);
+        salarie2.setCongesPayesAcquisAnneeNMoins1(15.0);
+
+        repository.save(salarie1);
+        repository.save(salarie2);
+
+        // WHEN : on calcule la part de congés pris
+        Double result = repository.partCongesPrisTotauxAnneeNMoins1();
+
+        // THEN : comparaison avec tolérance pour les nombres à virgule
+        Double attendu = 15.0 / 35.0;
+        Assertions.assertEquals(attendu, result, 0.0001);
     }
 }
