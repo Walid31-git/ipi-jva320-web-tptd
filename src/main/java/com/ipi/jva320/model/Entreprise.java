@@ -147,8 +147,19 @@ public final class Entreprise {
      * @return
      */
     public static boolean estDansPlage(LocalDate d, LocalDate debut, LocalDate fin) {
-        // à implémenter en TDD !
-        throw new RuntimeException("à implémenter en TDD !");
-    }
 
+        // Vérification des paramètres
+        if (d == null || debut == null || fin == null) {
+            throw new IllegalArgumentException("Les dates ne peuvent pas être null");
+        }
+
+        // Si la plage est incohérente (début après fin)
+        if (debut.isAfter(fin)) {
+            return false;
+        }
+
+        // On vérifie que la date est bien comprise dans l’intervalle (bornes incluses)
+        return (d.isEqual(debut) || d.isAfter(debut))
+                && (d.isEqual(fin) || d.isBefore(fin));
 }
+    
