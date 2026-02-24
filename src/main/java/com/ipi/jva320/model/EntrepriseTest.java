@@ -1,8 +1,9 @@
 package com.ipi.jva320.model;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -97,5 +98,27 @@ class EntrepriseTest {
 
         // Then
         assertFalse(resultat);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "2023-01-01,true", 
+            "2023-05-01,true", 
+            "2023-05-08,true", 
+            "2023-05-19,true", 
+            "2023-05-29,true", 
+            "2023-07-14,true", 
+            "2023-08-15,true", 
+            "2023-11-01,true", 
+            "2023-11-11,true", 
+            "2023-12-25,true", 
+    })
+    public void testEstJourFerie(String dateStr, boolean attendu) {
+        // Given
+        LocalDate date = LocalDate.parse(dateStr);
+        //When
+        boolean resultat = Entreprise.estJourFerie(date);
+        //Then
+        Assertions.assertEquals(attendu, resultat);
     }
 }
